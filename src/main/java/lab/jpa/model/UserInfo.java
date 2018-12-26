@@ -62,4 +62,7 @@ public class UserInfo {
 	public void changeName(String newName) {
 		this.username = newName;
 	}
+	public void setUsername(String username) {
+		this.username = username;
+	}
 }
