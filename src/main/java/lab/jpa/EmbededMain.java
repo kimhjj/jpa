@@ -17,6 +17,8 @@ public class EmbededMain {
 		EntityManager entityManager = emf.createEntityManager();
 		EntityTransaction transaction = entityManager.getTransaction();
 
+		// Embeded: 하나의 테이블이 생긴다.
+		// hotel 테이블이 embedded 된 address 모델의 프로퍼티를 가진다.
 		try {
 			transaction.begin();
 			
