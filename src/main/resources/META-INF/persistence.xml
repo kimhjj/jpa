@@ -10,8 +10,9 @@
         <class>lab.jpa.model.UserInfo</class>
         <class>lab.jpa.model.Review</class>
         <class>lab.jpa.model.Hotel</class>
+        <class>lab.jpa.model.Sight</class>
         <!-- <class>lab.jpa.model.Sight</class> -->
-         
+        
         <exclude-unlisted-classes>true</exclude-unlisted-classes>
 
         <properties>
