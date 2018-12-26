@@ -75,10 +75,10 @@ public class AddUserMain {
 			// delete from userinfo where userid=?
 			*/
 			
-			///* 
+			/* 
 			// 조회: 1차 캐시와 동일성 보장
 			// TEST: 삭제->생성->조회 확인
-			//entityManager.remove(entityManager.find(UserInfo.class, "admin"));
+			entityManager.remove(entityManager.find(UserInfo.class, "admin"));
 			UserInfo user = new UserInfo("admin", "관리자", "a1234","서울", "admin@korea.com", new Date());
 			entityManager.persist(user);
 			user = entityManager.find(UserInfo.class, "admin");
@@ -86,8 +86,25 @@ public class AddUserMain {
 			System.out.println(user==user2);
 			transaction.commit();
 			// true
-			//*/
+			*/
 			
+			///*
+			//entityManager.remove(entityManager.find(UserInfo.class, "admin"));
+			// 1. 비영속 상태
+			UserInfo user = new UserInfo("admin", "관리자", "a1234","서울", "admin@korea.com", new Date());
+			//entityManager.persist(user);
+			user = entityManager.find(UserInfo.class, "admin");
+			System.out.println(">>>>>>>>>>>>1 " + user.hashCode());
+			// 2. 준영속 상태
+			entityManager.detach(user);
+			// 3. name 속성 변경
+			user.changeName("kimhj");
+			// 4. 영속 상태
+			entityManager.merge(user);
+			user = entityManager.find(UserInfo.class, "admin");
+			System.out.println(">>>>>>>>>>>>2 " + user.hashCode());
+			transaction.commit();
+			//*/
         } catch (Exception ex) {
             ex.printStackTrace();
             transaction.rollback();
