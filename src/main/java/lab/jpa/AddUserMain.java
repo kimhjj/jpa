@@ -18,24 +18,32 @@ public class AddUserMain {
 		
 		try {
 			transaction.begin();
+			/** 영속성 컨텍스트와 관련한 엔티티의 4가지 상태
+			 * # 비영속 상태(new/transient), java 객체
+			 * # 영속 상태(managed), 1차 캐시 저장
+			 * # 준영속 상태(detached), 1차 캐시에서 삭제, db에는 존재
+			 * # 삭제(removed), 영속성 컨텍스트와 db에서 삭제
+			 */
+			
+			/** sqlplus
+			 * # sqlplus /nolog
+			 * # connect hr
+			 * # pw: oracle
+			 * # desc userinfo
+			 * # select * from userinfo;
+			 */
 			
 			/* 
 			// 저장
-			UserInfo user = new UserInfo("admin", "관리자", "a1234","서울", "admin@korea.com", new Date());
-			entityManager.persist(user);
+			UserInfo user = new UserInfo("admin", "관리자", "a1234","서울", "admin@korea.com", new Date());	// 비영속 상태, java 객체
+			entityManager.persist(user);	// 영속 상태(managed), 1차 캐시 저장
 			transaction.commit();
+			// insert into userinfo (address, create_date, email, username, userpwd, userid) values (?, ?, ?, ?, ?, ?)
 			*/
-
-			// 1# sqlplus /nolog
-			// 2# connect hr
-			// 3# pw: oracle
-			// 4# desc userinfo
-			// 5# select * from userinfo;
 			
 			/* 
 			// 조회1
-			// 영속엔티티, 1차 캐시 저장
-			UserInfo user = entityManager.find(UserInfo.class, "admin");
+			UserInfo user = entityManager.find(UserInfo.class, "admin");	// 영속 상태(managed), 1차 캐시 저장
 			transaction.commit();
 			System.out.println(user);
 			// UserInfo [userid=admin, username=관리자, userpwd=a1234, address=서울, email=admin@korea.com]
@@ -43,7 +51,6 @@ public class AddUserMain {
 			
 			/* 
 			// 수정
-			// 영속 엔티티, 1차 캐시 저장
 			UserInfo user = entityManager.find(UserInfo.class, "admin");
 			// 영속 엔티티 필드값 변경
 			user.setUsername("마스터");	// 동일: user.changeName("마스터");
@@ -60,16 +67,26 @@ public class AddUserMain {
 			// UserInfo [userid=admin, username=마스터, userpwd=a1234, address=서울, email=admin@korea.com]
 			*/
 			
+			/* 
 			// 삭제
 			UserInfo user = entityManager.find(UserInfo.class, "admin");
-			entityManager.remove(user);
+			entityManager.remove(user);		// 준영속 상태(detached), 1차 캐시에서 삭제, db에는 존재
 			transaction.commit();
 			// delete from userinfo where userid=?
+			*/
 			
-			// 1# sqlplus /nolog
-			// 2# connect hr
-			// 3# pw: oracle
-			// 4# select * from userinfo;
+			///* 
+			// 조회: 1차 캐시와 동일성 보장
+			// TEST: 삭제->생성->조회 확인
+			//entityManager.remove(entityManager.find(UserInfo.class, "admin"));
+			UserInfo user = new UserInfo("admin", "관리자", "a1234","서울", "admin@korea.com", new Date());
+			entityManager.persist(user);
+			user = entityManager.find(UserInfo.class, "admin");
+			UserInfo user2 = entityManager.find(UserInfo.class, "admin");
+			System.out.println(user==user2);
+			transaction.commit();
+			// true
+			//*/
 			
         } catch (Exception ex) {
             ex.printStackTrace();
