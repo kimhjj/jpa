@@ -20,7 +20,7 @@ public class SequenceMain {
 		try {
 			transaction.begin();
 
-			Review  review = new Review("KR-S-01", 5, "최고입니다.", new Date());
+			Review review = new Review("KR-S-01", 5, "최고입니다.", new Date());
 			entityManager.persist(review); //select hotel_review_seq.nextval from dual 쿼리 실행
 			Long id = review.getId(); //시퀀스에서 구한 식별자는 엔티티에 할당된
 			System.out.println(id);
