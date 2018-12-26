@@ -12,6 +12,9 @@ import javax.persistence.SecondaryTable;
 import javax.persistence.SequenceGenerator;
 
 @Entity
+// 이것을 써줘야 조인
+// sight_detail에 sight_id가 FK로 생성됨
+// SecondaryMain.java에서 하나씩 넣음. 현재는 일대일
 @SecondaryTable(
 	name = "sight_detail",
 	pkJoinColumns = @PrimaryKeyJoinColumn(
@@ -23,7 +26,8 @@ public class Sight {
 	@Id
     @SequenceGenerator(name="sight_seq_gen", sequenceName="sight_seq", allocationSize=1)
     @GeneratedValue(generator="sight_seq_gen")
-    private Long id;
+    private Long id;	// 자동 증가
+	
     private String name;
 
     @Embedded
@@ -39,6 +43,7 @@ public class Sight {
 
     @Embedded
     @AttributeOverrides({
+    		// 프로퍼티 명과 컬럼 명 이구나..
             @AttributeOverride(name="hoursOfOperation", column = @Column(name = "hours_op", table="sight_detail")),
             @AttributeOverride(name="holidays", column = @Column(table="sight_detail")),
             @AttributeOverride(name="facilities", column = @Column(table="sight_detail"))
