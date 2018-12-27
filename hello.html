@@ -1,0 +1,68 @@
+﻿<!DOCTYPE html>
+<html>
+<head></head>
+<body>
+Hello ! <br/>
+<a href="java-1.8.0-openjdk-1.8.0.181-1.b13.ojdkbuild.windows.x86_64.zip">openjdk18</a>
+<h1>2018.12.26</h1>
+<div>
+	<div>
+		<p>ORM: Object Relational Mapping</p>
+		<span>RDB 테이블을 객체지향적으로 사용하기 위한 기술</span>
+		<span>관계형DB를 객체지향과 매핑시킨다는 추상화된 개념</span>
+		<span>JPA는 ORM 개념을 java 언어에서 구현하기 위한 표준 기술</span>
+		<span>ORM을 프로젝트에 도입하면 자동 생성되는 SQL문들의 성능 개선을 위한 튜닝 작업이 어려움</span>
+		<span>쿼리를 작성하지 않지만, 내부적으로는 쿼리가 만들어지고 실행됨</span>
+	</div>
+	<div>
+		<p>JPA Provider: JPA 구현체</p>
+		<span>그것이 Hibernate. 오픈소스</span>
+		<span>(Hibernate, EclipseLink, DataNucleus)</span>
+	</div>
+	<div>
+		<p>JPA 장점</p>
+		<span>객체지향적으로 데이터를 관리하며 비지니스 로직에 집중 가능</span>
+		<span>테이블 구조를 객체로 관리(Model)</span>
+		<span>기본 Entity에 대해 CRUD 자동 생성</span>
+		<span>사용자 정의 네임스페이스 가능</span>
+		<span>데이터를 캐시해두는 저장소(Repository)관리를 효율적으로 하도록 지원</span>
+	</div>
+	<div>
+		<p>JPA 단점</p>
+		<span>객체지향 및 Spring MVC패턴을 정확히 이해해야 함</span>
+		<span>공부할게 많고</span>
+		<span>특정 데이터베이스의 강력함을 활용할 수 없다. (통계, 데이터 집계, 배치...)</span>
+	</div>
+	<div>
+		<p>Oracle 유저 생성</p>
+		<span>cmd>sqlplus /nolog</span>
+		<span>C:\Users\kosta>sqlplus /nolog</span>
+		<span>SQL*Plus: Release 11.2.0.2.0 Production on 수 12월 26 09:40:00 2018</span>
+		<span>SQL> connect sys/oracle as sysdba</span>
+		<span>Connected.</span>
+		<span>SQL> alter user hr</span>
+		<span>  2  identified by oracle</span>
+		<span>  3  account unlock;</span>
+	</div>
+	<div>
+		<p>실습</p>
+		<span>1. spring starter</span>
+		<span>2. SQL > JPA, JDBC 선택</span>
+		<span>3. pom.xml에 repository(code.lds.com), dependency(ojdbc6) 추가</span>
+		<span>4. persistence.xml: https://gist.github.com/aelkz/a76f1f4c27c182f8bfec2f7108796901</span>
+		<span>5. sqlplus /nolog >>> connect hr >>> oracle</span>
+	</div>
+</div>
+</body>
+<style >
+div > div {
+margin-bottom: 50px;
+}
+div > div > p {
+font-weight: bold;
+}
+div > div > span {
+display: block;
+}
+</style>
+</html>
